@@ -2,17 +2,16 @@
            (replacing the palceholder with your Github name):
            https://api.github.com/users/<your name>
 */
-axios.get('https://api.github.com/users/J2Macwilliams')
-.then(response => {
-  console.log(response);
-  // response.data.message.forEach(item => {
-  //   const newDog = DogCard(item);
-  //   entryPoint.appendChild(newDog);
-  // })
-})
-.catch(error => {
-console.log("The data was not returned", error);
-});
+// axios.get('https://api.github.com/users/J2Macwilliams')
+// .then(response => {
+//   console.log(response);
+//   GitHubCard(response);
+//   })
+// .catch(error => {
+// console.log("The data was not returned", error);
+// });
+
+
 // https://github.com/J2Macwilliams
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
@@ -24,6 +23,7 @@ console.log("The data was not returned", error);
 /* Step 4: Pass the data received from Github into your function, 
            create a new component and add it to the DOM as a child of .cards
 */
+// cards.appendChild(GitHubCard());
 
 /* Step 5: Now that you have your own card getting added to the DOM, either 
           follow this link in your browser https://api.github.com/users/<Your github name>/followers 
@@ -56,10 +56,14 @@ const followersArray = [];
 </div>
 
 */
-const cards = document.querySelector('.cards');
+
+
+
+
 
 function GitHubCard(handle){
-  const newCard = document.createElement('div'),
+  //Create Element
+  const card = document.createElement('div'),
         newImg = document.createElement('img'),
         newCardInfo = document.createElement('div'),
         newName = document.createElement('h3'),
@@ -72,40 +76,58 @@ function GitHubCard(handle){
         newBio = document.createElement('p');
 
   //set content
-  newImg.src = 'handle.src';
-  newName.textContent = 'handle.name';
-  newUserName.textContent = 'handle.login';
-  newLocation.textContent = 'handle.location';
-  newAnchor.textContent = 'handle.url';
-  newFollowers.textContent = 'handle.followers';
-  newFollowing.textContent = 'handle.following';
-  newBio.textContent = 'handle.bio';
-
+  newImg.src = handle.data.avatar_url;
+  newName.textContent = handle.data.name;
+  newUserName.textContent = handle.data.login;
+  newLocation.textContent = handle.data.location;
+  newProfile.textContent = `Profile: `
+  newAnchor.href = handle.data.html_url;
+  newAnchor.textContent = `${handle.data.html_url}`
+  newFollowers.textContent = `Followers: ${handle.data.followers}`;
+  newFollowing.textContent = `Following: ${handle.data.following}`;
+  newBio.textContent = handle.data.bio;
 
   //add Class
-  newCard.classList.add(card);
-  newCardInfo.classList.add(card-info);
-  newName.classList.add(name);
-  newUserName.classList.add(username);
+  card.classList.add('card');
+  newCardInfo.classList.add('card-info');
+  newName.classList.add('name');
+  newUserName.classList.add('username');
 
   //Set up structure of elements 
-  newCard.appendChild(newImg);
-  newCard.appendChild(newCardInfo);
+  card.appendChild(newImg);
+  card.appendChild(newCardInfo);
   newCardInfo.appendChild(newName);
   newCardInfo.appendChild(newUserName);
   newCardInfo.appendChild(newLocation);
+  newCardInfo.appendChild(newProfile);
+  newProfile.appendChild(newAnchor);
   newCardInfo.appendChild(newFollowers);
   newCardInfo.appendChild(newFollowing);
   newCardInfo.appendChild(newBio);
-  newCardInfo.appendChild(newProfile);
-  newProfile.appendChild(newAnchor);
+  
+
+  return document.querySelector('.cards').appendChild(card);
+};
 
 
 
-  return newCard
-}
+// .then(response => {
+//   console.log(response);
+//   response.data.message.forEach(item => {
+//     const newDog = DogCard(item);
+//     entryPoint.appendChild(newDog);
+//   })
+// })
 
-cards.appendChild(GitHubCard(handle));
+axios.get('https://api.github.com/users/J2Macwilliams')
+.then(response => {
+  console.log(response);
+  GitHubCard(response);
+  })
+.catch(error => {
+console.log("The data was not returned", error);
+});
+
 /* List of LS Instructors Github username's: 
   tetondan
   dustinmyers
@@ -113,3 +135,21 @@ cards.appendChild(GitHubCard(handle));
   luishrd
   bigknell
 */
+const followArray = [
+  'EricFerguson76',
+  'TinySquid',
+  'ndacode',
+  'Lfritze',
+  'VivaCode',
+  'MsMaddyMac'
+];
+
+followArray.forEach((user) => {
+  axios.get(`https://api.github.com/users/${user}`)
+  .then(result => {
+    GitHubCard(result);
+  })
+  .catch(error => {
+    console.log("The data was not returned", error);
+    });
+});
