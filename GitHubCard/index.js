@@ -65,6 +65,7 @@ function GitHubCard(handle){
         newUserName = document.createElement('p'),
         newLocation = document.createElement('p'),
         newProfile = document.createElement('p'),
+        newAnchor = document.createElement('a'),
         newFollowers = document.createElement('p'),
         newFollowing = document.createElement('p'),
         newBio = document.createElement('p');
@@ -73,7 +74,30 @@ function GitHubCard(handle){
   newImg.src = 'handle.src';
   newName.textContent = 'handle.name';
   newUserName.textContent = 'handle.login';
-  newLocation.textContent = 'handle.'
+  newLocation.textContent = 'handle.location';
+  newAnchor.textContent = 'handle.url';
+  newFollowers.textContent = 'handle.followers';
+  newFollowing.textContent = 'handle.following';
+  newBio.textContent = 'handle.bio';
+
+
+  //add Class
+  newCard.classList.add(card);
+  newCardInfo.classList.add(card-info);
+  newName.classList.add(name);
+  newUserName.classList.add(username);
+
+  //add inheritance
+  newCard.appendChild(newImg);
+  newCard.appendChild(newCardInfo);
+  newCardInfo.appendChild(newName);
+  newCardInfo.appendChild(newUserName);
+  newCardInfo.appendChild(newLocation);
+  newCardInfo.appendChild(newFollowers);
+  newCardInfo.appendChild(newFollowing);
+  newCardInfo.appendChild(newBio);
+  newCardInfo.appendChild(newProfile);
+  newProfile.appendChild(newAnchor);
 }
 
 /* List of LS Instructors Github username's: 
