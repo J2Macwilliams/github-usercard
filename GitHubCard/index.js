@@ -56,6 +56,7 @@ const followersArray = [];
 </div>
 
 */
+const cards = document.querySelector('.cards');
 
 function GitHubCard(handle){
   const newCard = document.createElement('div'),
@@ -87,7 +88,7 @@ function GitHubCard(handle){
   newName.classList.add(name);
   newUserName.classList.add(username);
 
-  //add inheritance
+  //Set up structure of elements 
   newCard.appendChild(newImg);
   newCard.appendChild(newCardInfo);
   newCardInfo.appendChild(newName);
@@ -98,8 +99,13 @@ function GitHubCard(handle){
   newCardInfo.appendChild(newBio);
   newCardInfo.appendChild(newProfile);
   newProfile.appendChild(newAnchor);
+
+
+
+  return newCard
 }
 
+cards.appendChild(GitHubCard(handle));
 /* List of LS Instructors Github username's: 
   tetondan
   dustinmyers
