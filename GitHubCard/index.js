@@ -141,7 +141,11 @@ const followArray = [
   'ndacode',
   'Lfritze',
   'VivaCode',
-  'MsMaddyMac'
+  'MsMaddyMac',
+  'dislersd',
+  'drejohnson',
+  'G3Ram',
+  'BlueImport'
 ];
 
 followArray.forEach((user) => {
